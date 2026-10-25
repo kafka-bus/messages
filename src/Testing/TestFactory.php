@@ -6,7 +6,6 @@ use Faker\Factory;
 use Faker\Generator;
 use JsonException;
 use KafkaBus\Core\Testing\Consumers\MessageFactory;
-use KafkaBus\Core\Topics\TopicRegistry;
 use RdKafka\Message;
 
 abstract class TestFactory
@@ -75,9 +74,9 @@ abstract class TestFactory
         return $this->immutableSet('messageFactory', $this->messageFactory->withKey($key));
     }
 
-    public function withTopicKey(string $topicKey, TopicRegistry $registry = null): static
+    public function withTopicKey(?string $topicKey): static
     {
-        return $this->immutableSet('messageFactory', $this->messageFactory->withTopicKey($topicKey, $registry));
+        return $this->immutableSet('messageFactory', $this->messageFactory->withTopicKey($topicKey));
     }
 
     public function withPartition(int $partition): static
